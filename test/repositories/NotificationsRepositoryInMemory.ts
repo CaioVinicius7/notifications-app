@@ -1,7 +1,5 @@
-import {
-  Notification,
-  NotificationProps
-} from "../../src/app/entities/notification";
+import { Notification, NotificationProps } from "@app/entities/notification";
+
 import { NotificationsRepository } from "../../src/app/repositories/notificationsRepository";
 
 export class NotificationsRepositoryInMemory extends NotificationsRepository {

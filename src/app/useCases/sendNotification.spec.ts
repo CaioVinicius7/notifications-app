@@ -1,4 +1,5 @@
-import { NotificationsRepositoryInMemory } from "../../../test/repositories/NotificationsRepositoryInMemory";
+import { NotificationsRepositoryInMemory } from "@test/repositories/NotificationsRepositoryInMemory";
+
 import { SendNotification } from "./sendNotification";
 
 let notificationsRepository: NotificationsRepositoryInMemory;
