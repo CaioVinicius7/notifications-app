@@ -3,15 +3,15 @@ import { NotificationsRepositoryInMemory } from "@test/repositories/Notification
 import { SendNotification } from "./sendNotification";
 
 let notificationsRepository: NotificationsRepositoryInMemory;
+let sendNotification: SendNotification;
 
 describe("Send notification", () => {
   beforeEach(() => {
     notificationsRepository = new NotificationsRepositoryInMemory();
+    sendNotification = new SendNotification(notificationsRepository);
   });
 
   it("should be able to send a notification", async () => {
-    const sendNotification = new SendNotification(notificationsRepository);
-
     const { notification } = await sendNotification.execute({
       content: "Você tem uma nova solicitação de amizade",
       category: "social",
