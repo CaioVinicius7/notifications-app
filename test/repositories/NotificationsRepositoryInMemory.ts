@@ -17,6 +17,12 @@ export class NotificationsRepositoryInMemory extends NotificationsRepository {
     return notification;
   }
 
+  async countManyByRecipientId(recipientId: string): Promise<number> {
+    return this.notifications.filter(
+      (notification) => notification.recipientId === recipientId
+    ).length;
+  }
+
   async create(notification: Notification): Promise<void> {
     this.notifications.push(notification);
   }
