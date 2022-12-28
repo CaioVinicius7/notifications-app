@@ -1,15 +1,15 @@
 import { makeNotification } from "@test/factories/notificationFactory";
 import { NotificationsRepositoryInMemory } from "@test/repositories/NotificationsRepositoryInMemory";
 
-import { CountRecipientNotification } from "./countRecipientNotifications";
+import { CountRecipientNotifications } from "./countRecipientNotifications";
 
 let notificationsRepository: NotificationsRepositoryInMemory;
-let countRecipientNotification: CountRecipientNotification;
+let countRecipientNotifications: CountRecipientNotifications;
 
 describe("Count recipient notifications", () => {
   beforeEach(() => {
     notificationsRepository = new NotificationsRepositoryInMemory();
-    countRecipientNotification = new CountRecipientNotification(
+    countRecipientNotifications = new CountRecipientNotifications(
       notificationsRepository
     );
   });
@@ -35,7 +35,7 @@ describe("Count recipient notifications", () => {
       })
     );
 
-    const { count } = await countRecipientNotification.execute({
+    const { count } = await countRecipientNotifications.execute({
       recipientId
     });
 
