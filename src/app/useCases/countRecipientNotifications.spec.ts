@@ -1,5 +1,4 @@
-import { Content } from "@app/entities/content";
-import { Notification } from "@app/entities/notification";
+import { makeNotification } from "@test/factories/notificationFactory";
 import { NotificationsRepositoryInMemory } from "@test/repositories/NotificationsRepositoryInMemory";
 
 import { CountRecipientNotification } from "./countRecipientNotifications";
@@ -19,28 +18,20 @@ describe("Count recipient notifications", () => {
     const recipientId = "c675005e-eed0-44de-92a5-5c99b4439fd1";
 
     await notificationsRepository.create(
-      new Notification({
-        category: "Social",
-        content: new Content("Nova solicitação de amizade!"),
+      makeNotification({
         recipientId
       })
     );
 
     await notificationsRepository.create(
-      new Notification({
-        category: "Promoções",
-        content: new Content(
-          "Aproveite o desconto especial em todos os cursos!"
-        ),
+      makeNotification({
         recipientId
       })
     );
 
     await notificationsRepository.create(
-      new Notification({
-        category: "Aulas",
-        content: new Content("Novos conteúdos acabaram de ser lançados!"),
-        recipientId: "cc7a8b85-8136-44d5-b163-7e2d39412864"
+      makeNotification({
+        recipientId: "fake-recipient-id"
       })
     );
 
