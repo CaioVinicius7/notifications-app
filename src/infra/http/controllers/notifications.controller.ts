@@ -114,6 +114,26 @@ export class NotificationsController {
     };
   }
 
+  @ApiParam({
+    name: "id",
+    description: "Id da notificação a ser marcada como lida",
+    schema: {
+      format: "uuid"
+    }
+  })
+  @ApiOkResponse({
+    description: "Notificação marcada como lida com sucesso."
+  })
+  @ApiNotFoundResponse({
+    description: "Notificação com o uuid fornecido não encontrada.",
+    schema: {
+      example: {
+        statusCode: 400,
+        message: "Notification not found.",
+        error: "Not Found"
+      }
+    }
+  })
   @Patch("/:id/read")
   async read(@Param("id") id: string) {
     await this.readNotification.execute({
