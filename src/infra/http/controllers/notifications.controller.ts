@@ -141,6 +141,26 @@ export class NotificationsController {
     });
   }
 
+  @ApiParam({
+    name: "id",
+    description: "Id da notificação a ser marcada como não lida",
+    schema: {
+      format: "uuid"
+    }
+  })
+  @ApiOkResponse({
+    description: "Notificação marcada como não lida com sucesso."
+  })
+  @ApiNotFoundResponse({
+    description: "Notificação com o uuid fornecido não encontrada.",
+    schema: {
+      example: {
+        statusCode: 400,
+        message: "Notification not found.",
+        error: "Not Found"
+      }
+    }
+  })
   @Patch("/:id/unread")
   async unread(@Param("id") id: string) {
     await this.unreadNotification.execute({
