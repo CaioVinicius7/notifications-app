@@ -81,6 +81,28 @@ export class NotificationsController {
     };
   }
 
+  @ApiParam({
+    name: "recipientId",
+    description: "Id do destinatário das notificações",
+    schema: {
+      format: "uuid"
+    }
+  })
+  @ApiOkResponse({
+    description: "Notificações enviadas ao destinatário.",
+    schema: {
+      example: {
+        notifications: [
+          {
+            id: "64c9d6e9-3b3d-4847-9b1b-e1f6a0903f70",
+            content: "Nova solicitação de amizade recebida.",
+            category: "Social",
+            recipientId: "40b4f5ab-51e1-47ae-815b-6d5aab296aee"
+          }
+        ]
+      }
+    }
+  })
   @Get("/from/:recipientId")
   async getFromRecipient(@Param("recipientId") recipientId: string) {
     const { notifications } = await this.getRecipientNotifications.execute({
