@@ -5,7 +5,13 @@ import { ReadNotification } from "@app/useCases/readNotification";
 import { SendNotification } from "@app/useCases/sendNotification";
 import { UnreadNotification } from "@app/useCases/unreadNotification";
 import { Controller, Post, Get, Patch, Param, Body } from "@nestjs/common";
-import { ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags
+} from "@nestjs/swagger";
 
 import { NotificationViewModel } from "../viewModels/notificationViewModel";
 import { CreateNotificationDTO } from "./dtos/createNotificationDTO";
@@ -22,6 +28,26 @@ export class NotificationsController {
     private getRecipientNotifications: GetRecipientNotifications
   ) {}
 
+  @ApiParam({
+    name: "id",
+    description: "Id da notificação a ser cancelada",
+    schema: {
+      format: "uuid"
+    }
+  })
+  @ApiOkResponse({
+    description: "Notificação cancelada com sucesso."
+  })
+  @ApiNotFoundResponse({
+    description: "Notificação com o uuid fornecido não encontrada.",
+    schema: {
+      example: {
+        statusCode: 400,
+        message: "Notification not found.",
+        error: "Not Found"
+      }
+    }
+  })
   @Patch("/:id/cancel")
   async cancel(@Param("id") id: string) {
     await this.cancelNotification.execute({
