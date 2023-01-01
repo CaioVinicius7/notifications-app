@@ -55,6 +55,21 @@ export class NotificationsController {
     });
   }
 
+  @ApiParam({
+    name: "recipientId",
+    description: "Id do destinatário das notificações",
+    schema: {
+      format: "uuid"
+    }
+  })
+  @ApiOkResponse({
+    description: "Quantidades de notificações enviadas ao destinatário.",
+    schema: {
+      example: {
+        count: 4
+      }
+    }
+  })
   @Get("/count/from/:recipientId")
   async countFromRecipient(@Param("recipientId") recipientId: string) {
     const { count } = await this.countRecipientNotifications.execute({
