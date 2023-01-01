@@ -5,10 +5,12 @@ import { ReadNotification } from "@app/useCases/readNotification";
 import { SendNotification } from "@app/useCases/sendNotification";
 import { UnreadNotification } from "@app/useCases/unreadNotification";
 import { Controller, Post, Get, Patch, Param, Body } from "@nestjs/common";
+import { ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
 
 import { NotificationViewModel } from "../viewModels/notificationViewModel";
 import { CreateNotificationDTO } from "./dtos/createNotificationDTO";
 
+@ApiTags("Notifications")
 @Controller("notifications")
 export class NotificationsController {
   constructor(
@@ -63,6 +65,19 @@ export class NotificationsController {
     });
   }
 
+  @ApiCreatedResponse({
+    description: "Notificação enviada com sucesso.",
+    schema: {
+      example: {
+        notification: {
+          id: "64c9d6e9-3b3d-4847-9b1b-e1f6a0903f70",
+          content: "Nova solicitação de amizade recebida.",
+          category: "Social",
+          recipientId: "40b4f5ab-51e1-47ae-815b-6d5aab296aee"
+        }
+      }
+    }
+  })
   @Post()
   async createNotification(@Body() body: CreateNotificationDTO) {
     const { recipientId, content, category } = body;

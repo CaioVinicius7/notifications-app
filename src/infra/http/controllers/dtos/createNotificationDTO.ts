@@ -1,6 +1,12 @@
 import { IsNotEmpty, IsUUID, Length } from "class-validator";
 
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateNotificationDTO {
+  @ApiProperty({
+    format: "uuid",
+    description: "Id do destinatário da notificação"
+  })
   @IsNotEmpty({
     message: "O campo recipientId é obrigatório."
   })
@@ -9,6 +15,10 @@ export class CreateNotificationDTO {
   })
   recipientId: string;
 
+  @ApiProperty({
+    example: "Nova solicitação de amizade recebida.",
+    description: "Conteúdo da notificação"
+  })
   @IsNotEmpty({
     message: "O campo content é obrigatório."
   })
@@ -17,6 +27,10 @@ export class CreateNotificationDTO {
   })
   content: string;
 
+  @ApiProperty({
+    example: "Social",
+    description: "Categoria da notificação"
+  })
   @IsNotEmpty({
     message: "O campo category é obrigatório."
   })
